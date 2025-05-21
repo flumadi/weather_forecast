@@ -10,22 +10,24 @@ The application fetches real-time weather data from the OpenWeatherMap API and p
  -Current Weather Display: Shows temperature, humidity, wind speed, and conditions  
        3-Day Forecast: Simple forecast prediction for upcoming days  
        Multiple Locations: Pre-configured with major world cities  
-       Responsive Design: Works on desktop and mobile devices  
-       API Integration: Connects with OpenWeatherMap for live data
+       Responsive Design: Works on desktop and mobile devices   
+       API Integration: Connects with OpenWeatherMap for live data  
 
 ## Technology Stack  
-   Backend: Django 4.x    
-   Frontend: HTML5, Bootstrap 5  
-   API: OpenWeatherMap  
-   Database: SQLite (default)
--Dependencies:  
-   requests  
-   python-dotenv
+   -Backend: Django 4.x    
+   -Frontend: HTML5, Bootstrap 5  
+   -API: OpenWeatherMap  
+   -Database: SQLite (default)  
+   
+-Dependencies:   
+   requests   
+   python-dotenv  
+   
 -Installation Guide  
    Prerequisites    
-      Python 3.7+  
-      pip package manager  
-      OpenWeatherMap API key (free tier available)  
+      -Python 3.7+  
+      -pip package manager  
+      -OpenWeatherMap API key (free tier available)  
       
 ## Setup Instructions  
    Clone the repository (or create from the provided code)  
