@@ -91,21 +91,27 @@ The free tier provides:
 
 ## Project Structure  
 weather_forecaster/  
-├── forecast/               # Main app directory  
-│   ├── management/         # Custom commands  
-│   ├── migrations/         # Database migrations  
-│   ├── templates/          # HTML templates  
-│   ├── admin.py            # Admin configuration  
-│   ├── apps.py             # App configuration  
-│   ├── models.py           # Database models  
-│   ├── urls.py             # App URLs  
-│   └── views.py            # View functions  
-├── weather_forecaster/     # Project config  
-│   ├── settings.py         # Django settings  
-│   ├── urls.py             # Project URLs  
-│   └── wsgi.py             # WSGI config  
-├── .env                    # Environment variables  
-└── manage.py               # Django CLI  
+├── forecast/  
+│   ├── migrations/  
+│   ├── __init__.py  
+│   ├── admin.py  
+│   ├── apps.py  
+│   ├── models.py  
+│   ├── tests.py  
+│   ├── urls.py  
+│   ├── views.py  
+│   └── templates/  
+│       └── forecast/  
+│           ├── base.html  
+│           ├── index.html  
+│           └── forecast.html  
+├── weather_forecaster/  
+│   ├── __init__.py  
+│   ├── asgi.py  
+│   ├── settings.py  
+│   ├── urls.py  
+│   └── wsgi.py  
+└── manage.py  
 
 ## Customization Options  
 Adding New Locations  
