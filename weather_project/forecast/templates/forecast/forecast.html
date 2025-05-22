@@ -1,0 +1,41 @@
+{% extends 'forecast/base.html' %}
+
+{% block content %}
+{% if location %}
+<div class="current-weather p-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h2>{{ location.name }}, {{ location.country_code }}</h2>
+            <h1 class="display-4">{{ current.temp }}°C</h1>
+            <p class="lead text-capitalize">{{ current.description }}</p>
+            <p>Humidity: {{ current.humidity }}%</p>
+            <p>Wind: {{ current.wind_speed }} m/s</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <img src="https://openweathermap.org/img/wn/{{ current.icon }}@2x.png" alt="Weather icon" class="weather-icon">
+        </div>
+    </div>
+</div>
+
+<h3 class="text-center mb-4">3-Day Forecast</h3>
+<div class="row">
+    {% for day in forecast %}
+    <div class="col-md-4 mb-4">
+        <div class="weather-card p-3">
+            <h5>{{ day.date|date:"D, M j" }}</h5>
+            <img src="https://openweathermap.org/img/wn/{{ day.icon }}.png" alt="Weather icon">
+            <p class="text-capitalize">{{ day.description }}</p>
+            <p>Day: {{ day.temp_day }}°C</p>
+            <p>Night: {{ day.temp_night }}°C</p>
+            <p>Humidity: {{ day.humidity }}%</p>
+            <p>Wind: {{ day.wind_speed }} m/s</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info">
+    Please select a location from the <a href="{% url 'index' %}">home page</a>.
+</div>
+{% endif %}
+{% endblock %}

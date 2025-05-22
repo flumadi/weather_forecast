@@ -1,0 +1,23 @@
+{% extends 'forecast/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="weather-card p-4 text-center">
+            <h1 class="mb-4">Weather Forecast</h1>
+            <form method="POST" action="{% url 'forecast' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <select class="form-select" name="location" required>
+                        <option value="" selected disabled>Select a location</option>
+                        {% for location in locations %}
+                        <option value="{{ location.id }}">{{ location.name }}, {{ location.country_code }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Get Forecast</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
