@@ -90,28 +90,24 @@ The free tier provides:
    -Current weather data only  
 
 ## Project Structure  
-weather_forecaster/  
-├── forecast/  
-│   ├── migrations/  
-│   ├── __init__.py  
-│   ├── admin.py  
-│   ├── apps.py  
-│   ├── models.py  
-│   ├── tests.py  
-│   ├── urls.py  
-│   ├── views.py  
-│   └── templates/  
-│       └── forecast/  
-│           ├── base.html  
-│           ├── index.html  
-│           └── forecast.html  
-├── weather_forecaster/  
-│   ├── __init__.py  
-│   ├── asgi.py  
-│   ├── settings.py  
-│   ├── urls.py  
-│   └── wsgi.py  
-└── manage.py  
+C:\Users\Fridah Mathias\Documents\Github\weather_forecast\  
+├── weather_forecast\ (virtual environment)  
+└── weather_project\  
+    ├── forecast\  
+    │   ├── migrations\  
+    │   ├── __init__.py  
+    │   ├── admin.py  
+    │   ├── apps.py  
+    │   ├── models.py  
+    │   ├── tests.py  
+    │   └── views.py  
+    ├── weather_project\  
+    │   ├── __init__.py  
+    │   ├── asgi.py  
+    │   ├── settings.py  
+    │   ├── urls.py  
+    │   └── wsgi.py  
+    └── manage.py  
 
 ## Customization Options  
 Adding New Locations  
