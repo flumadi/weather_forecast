@@ -6,6 +6,10 @@ from .models import Location, WeatherData
 from dotenv import load_dotenv
 
 load_dotenv()
+WEATHER_API_KEY = os.getenv('WEATHER_API_KEY')
+
+if not WEATHER_API_KEY:
+    raise ValueError("Missing WEATHER_API_KEY in environment variables")
 
 def get_weather_data(location):
     api_key = os.getenv('WEATHER_API_KEY')
