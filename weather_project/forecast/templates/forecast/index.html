@@ -1,22 +1,53 @@
 {% extends 'forecast/base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="weather-card p-4 text-center">
-            <h1 class="mb-4">Weather Forecast</h1>
-            <form method="POST" action="{% url 'forecast' %}">
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="weather-card p-4 mb-4">
+            <h1 class="text-center mb-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Weather Forecast</h1>
+            
+            <div class="text-center mb-4">
+                <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" 
+                     alt="Weather illustration" 
+                     style="max-width: 300px;"
+                     class="img-fluid mb-3">
+            </div>
+
+            <form method="POST" action="{% url 'forecast' %}" class="mb-5">
                 {% csrf_token %}
-                <div class="mb-3">
-                    <select class="form-select" name="location" required>
-                        <option value="" selected disabled>Select a location</option>
-                        {% for location in locations %}
-                        <option value="{{ location.id }}">{{ location.name }}, {{ location.country_code }}</option>
-                        {% endfor %}
-                    </select>
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <select class="form-select form-select-lg" name="location" required>
+                            <option value="" selected disabled>Select a location</option>
+                            {% for location in locations %}
+                            <option value="{{ location.id }}">{{ location.name }}, {{ location.country_code }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-cloud-sun me-2"></i>Get Forecast
+                        </button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Get Forecast</button>
             </form>
+
+            <h3 class="mb-3">Popular Cities</h3>
+            <div class="row g-3">
+                {% for location in locations|slice:":6" %}
+                <div class="col-md-4">
+<div class="city-highlight p-3" onclick="document.querySelector('select[name=\'location\']').value='{{ location.id|escapejs }}'; document.querySelector('form').submit();">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-city text-primary me-3 fs-4"></i>
+                            <div>
+                                <h5 class="mb-0">{{ location.name }}</h5>
+                                <small class="text-muted">{{ location.country_code }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

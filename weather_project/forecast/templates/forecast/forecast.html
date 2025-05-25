@@ -1,41 +1,94 @@
 {% extends 'forecast/base.html' %}
 
 {% block content %}
-{% if location %}
-<div class="current-weather p-4 mb-4">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>{{ location.name }}, {{ location.country_code }}</h2>
-            <h1 class="display-4">{{ current.temp }}°C</h1>
-            <p class="lead text-capitalize">{{ current.description }}</p>
-            <p>Humidity: {{ current.humidity }}%</p>
-            <p>Wind: {{ current.wind_speed }} m/s</p>
-        </div>
-        <div class="col-md-6 text-end">
-            <img src="https://openweathermap.org/img/wn/{{ current.icon }}@2x.png" alt="Weather icon" class="weather-icon">
-        </div>
-    </div>
-</div>
-
-<h3 class="text-center mb-4">3-Day Forecast</h3>
 <div class="row">
-    {% for day in forecast %}
-    <div class="col-md-4 mb-4">
-        <div class="weather-card p-3">
-            <h5>{{ day.date|date:"D, M j" }}</h5>
-            <img src="https://openweathermap.org/img/wn/{{ day.icon }}.png" alt="Weather icon">
-            <p class="text-capitalize">{{ day.description }}</p>
-            <p>Day: {{ day.temp_day }}°C</p>
-            <p>Night: {{ day.temp_night }}°C</p>
-            <p>Humidity: {{ day.humidity }}%</p>
-            <p>Wind: {{ day.wind_speed }} m/s</p>
+    <div class="col-lg-10 mx-auto">
+        {% if location %}
+        <div class="weather-card p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                    {{ location.name }}, {{ location.country_code }}
+                </h2>
+                <span class="badge bg-primary">
+                    {{ current.time|date:"D, M j" }}
+                </span>
+            </div>
+
+            <div class="current-weather p-4 mb-5 text-center" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 15px;">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <img src="https://openweathermap.org/img/wn/{{ current.icon }}@4x.png" 
+                             alt="Weather icon" 
+                             class="weather-icon-lg mb-3">
+                        <h3 class="text-capitalize">{{ current.description }}</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <h1 class="display-3 fw-bold">{{ current.temp }}°C</h1>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <p><i class="fas fa-tint me-2 text-primary"></i> Humidity</p>
+                                <p><i class="fas fa-wind me-2 text-primary"></i> Wind</p>
+                                <p><i class="fas fa-arrow-up me-2 text-primary"></i> High</p>
+                                <p><i class="fas fa-arrow-down me-2 text-primary"></i> Low</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p>{{ current.humidity }}%</p>
+                                <p>{{ current.wind_speed }} m/s</p>
+                                <p>{{ current.temp_max }}°C</p>
+                                <p>{{ current.temp_min }}°C</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mb-4">3-Day Forecast</h3>
+            <div class="row g-4">
+                {% for day in forecast %}
+                <div class="col-md-4">
+                    <div class="weather-card p-3 h-100">
+                        <h5 class="text-center mb-3">{{ day.date|date:"D, M j" }}</h5>
+                        <div class="text-center mb-3">
+                            <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" 
+                                 alt="Weather icon"
+                                 class="img-fluid">
+                            <p class="text-capitalize mt-2">{{ day.description }}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><i class="fas fa-sun me-2 text-warning"></i> Day</p>
+                                <p><i class="fas fa-moon me-2 text-secondary"></i> Night</p>
+                                <p><i class="fas fa-tint me-2 text-primary"></i> Humidity</p>
+                                <p><i class="fas fa-wind me-2 text-primary"></i> Wind</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p>{{ day.temp_day }}°C</p>
+                                <p>{{ day.temp_night }}°C</p>
+                                <p>{{ day.humidity }}%</p>
+                                <p>{{ day.wind_speed }} m/s</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
+        {% else %}
+        <div class="weather-card p-4 text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/4149/4149271.png" 
+                 alt="No location selected"
+                 style="max-width: 200px;"
+                 class="img-fluid mb-4">
+            <h3 class="mb-3">No Location Selected</h3>
+            <p class="lead">Please choose a location to view weather forecast</p>
+            <a href="{% url 'index' %}" class="btn btn-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Home
+            </a>
+        </div>
+        {% endif %}
     </div>
-    {% endfor %}
 </div>
-{% else %}
-<div class="alert alert-info">
-    Please select a location from the <a href="{% url 'index' %}">home page</a>.
-</div>
-{% endif %}
 {% endblock %}
